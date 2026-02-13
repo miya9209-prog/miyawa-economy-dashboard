@@ -230,8 +230,9 @@ def fetch_rss(feed_url: str, limit: int = 25):
 def fetch_naver_finance_news(limit: int = 25):
     url = "https://finance.naver.com/news/"
     r = safe_get(url, timeout=10)
-    soup = BeautifulSoup(r.text, "lxml")
+soup = BeautifulSoup(r.text, "html.parser")
 
+    
     items = []
     for a in soup.select("a"):
         href = a.get("href", "")
