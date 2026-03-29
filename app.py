@@ -230,9 +230,8 @@ def fetch_rss(feed_url: str, limit: int = 25):
 def fetch_naver_finance_news(limit: int = 25):
     url = "https://finance.naver.com/news/"
     r = safe_get(url, timeout=10)
-soup = BeautifulSoup(r.text, "html.parser")
+    soup = BeautifulSoup(r.text, "html.parser")
 
-    
     items = []
     for a in soup.select("a"):
         href = a.get("href", "")
@@ -605,6 +604,25 @@ def render_news():
             st.markdown('</div>', unsafe_allow_html=True)
 
 
+
+
+def render_footer():
+    st.markdown('<div class="hr-soft"></div>', unsafe_allow_html=True)
+    st.markdown(
+        """
+        <div style="text-align:center; padding: 8px 0 18px 0; font-size: 0.92rem; color: rgba(0,0,0,0.68);">
+            <a href="./개인정보처리방침" target="_self">개인정보처리방침</a>
+            &nbsp;|&nbsp;
+            <a href="./이용약관" target="_self">이용약관</a>
+            <div style="margin-top:10px; font-size:0.86rem; color: rgba(0,0,0,0.52);">
+                2026 MISHARP COMPANY by MIYAWA<br>
+                무단 게재, 복제, 전재를 금합니다.
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
 # =========================
 # Main Tabs
 # =========================
@@ -629,3 +647,5 @@ with tabs[1]:
     render_tab("W")
 with tabs[2]:
     render_tab("M")
+
+render_footer()
